@@ -1,5 +1,6 @@
 exports.config = {
-    
+//XXX UNCOMMENT FOR CORDOVA
+//    port: 4723,
     //
     // ==================
     // Specify Test Files
@@ -38,14 +39,44 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [{
+    capabilities: [
+    {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
         maxInstances: 5,
         //
         browserName: 'chrome'
-    }],
+    },
+/*    {
+        browserName: 'chrome',
+        chromeOptions: {
+            binary: __dirname + '/dist/electron-mat/Quasar App-linux-x64/Quasar App',
+            args: []
+        }
+    },
+*/
+    /*{
+      browserName: '',
+      // 'Android' or 'iOS'
+      platformName: 'Android',
+      // The version of the Android or iOS system
+      platformVersion: '9',
+      // For Android, Appium uses the first device it finds using "adb devices". So, this
+      // string simply needs to be non-empty.
+      // For iOS, this must exactly match the device name as seen in Xcode.
+      deviceName: 'any',
+      // Where to find the .apk or .ipa file to install on the device. The exact location
+      // of the file may change depending on your Cordova version.
+      app: './src-cordova/platforms/android/app/build/outputs/apk/debug/app-debug.apk',
+      // By default, Appium runs tests in the native context. By setting autoWebview to
+      // true, it runs our tests in the Cordova context.
+      autoWebview: true,
+      // When set to true, it will not show permission dialogs, but instead grant all
+      // permissions automatically.
+      autoGrantPermissions: true
+    }*/
+    ],
     //
     // ===================
     // Test Configurations
@@ -58,7 +89,7 @@ exports.config = {
     sync: true,
     //
     // Level of logging verbosity: silent | verbose | command | data | result | error
-    logLevel: 'verbose',
+    logLevel: 'silent',
     //
     // Enables colors for log output.
     coloredLogs: true,
@@ -111,24 +142,25 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    // services: [],//
+    services: ['chromedriver', 'appium'],//
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: http://webdriver.io/guide/testrunner/frameworks.html
     //
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
-    framework: 'mocha',
+    framework: 'jasmine',
     //
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: http://webdriver.io/guide/reporters/dot.html
-    // reporters: ['dot'],
+    reporters: ['spec'],
     //
-    // Options to be passed to Mocha.
-    // See the full list at http://mochajs.org/
-    mochaOpts: {
-        ui: 'bdd'
+    // Options to be passed to Jasmine.
+    jasmineNodeOpts: {
+        //
+        // Jasmine default timeout
+        defaultTimeoutInterval: 30000
     },
     //
     // =====
@@ -160,8 +192,9 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    // before: function (capabilities, specs) {
-    // },
+    before: function (capabilities, specs) {
+        browser.url('http://localhost:8081');
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
@@ -241,4 +274,13 @@ exports.config = {
      */
     // onComplete: function(exitCode, config, capabilities) {
     // }
+
+    appium: {
+        command: 'appium',
+        args: {
+            address: '127.0.0.1',
+            port: 4723,
+        }
+    },
+
 }
