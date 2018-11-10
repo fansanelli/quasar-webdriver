@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
     "appium": "appium",
-    "test": "wdio ./wdio.conf.js"
+    "test": "wdio ./test/config/wdio.conf.js"
   },
   "dependencies": {
     "appium-chromedriver": "^4.7.0",
