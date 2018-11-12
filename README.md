@@ -4,11 +4,20 @@
 
 The goal is to wire up a webdriver automated testing for quasar.
 
+Chromedriver testing:
 ```
 open 3 shells:
-$ quasar dev
 $ java -jar ./selenium-server-standalone-3.14.0.jar 
-$ ./node_modules/.bin/wdio wdio.conf.js
+$ quasar dev
+$ npm run test
 ```
+Appium* testing:
+```
+open 3 shells:
+$ java -jar ./selenium-server-standalone-3.14.0.jar 
+$ npm run appium
+$ npm run test-appium
+```
+(*)You need an android device or emulator up and running
 
-The original "test" has been ported to Mocha and made run on chromedriver
+The original test has been ported from Jest to Jasmine
