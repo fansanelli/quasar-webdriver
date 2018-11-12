@@ -18,6 +18,14 @@ $ java -jar ./selenium-server-standalone-3.14.0.jar
 $ npm run appium
 $ npm run test-appium
 ```
+Electron testing (NOT PASSING TEST YET):
+```
+open 3 shells:
+$ java -jar ./selenium-server-standalone-3.14.0.jar 
+$ npm run electron-chromedriver
+$ npm run test-electron
+```
+
 (*)You need an android device or emulator up and running
 
 The original test has been ported from Jest to Jasmine
