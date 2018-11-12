@@ -10,7 +10,9 @@
     "lint": "eslint --ext .js,.vue src",
     "appium": "appium",
     "test": "wdio ./test/config/wdio.conf.js",
-    "test-appium": "wdio ./test/config/wdio.appium.conf.js"
+    "test-appium": "wdio ./test/config/wdio.appium.conf.js",
+    "electron-chromedriver": "./node_modules/electron-chromedriver/bin/chromedriver --port=9515 --url-base=wd/hub --verbose",
+    "test-electron": "wdio ./test/config/wdio.electron.conf.js"
   },
   "dependencies": {
     "appium-chromedriver": "^4.7.0",
@@ -28,6 +30,12 @@
   "devDependencies": {
     "appium": "^1.9.1",
     "babel-eslint": "^8.2.1",
+    "devtron": "^1.4.0",
+    "electron": "^3.0.8",
+    "electron-chromedriver": "=3.0.0",
+    "electron-debug": "^2.0.0",
+    "electron-devtools-installer": "^2.2.4",
+    "electron-packager": "^12.2.0",
     "eslint": "^4.18.2",
     "eslint-config-standard": "^11.0.0",
     "eslint-friendly-formatter": "^4.0.1",
