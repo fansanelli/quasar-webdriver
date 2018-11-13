@@ -12,7 +12,7 @@ config.capabilities = [
         browserName: 'chrome',
         chromeOptions: {
             binary: './dist/electron-mat/Quasar App-linux-x64/Quasar App',
-            args: [ '--no-sandbox', '--headless', '--disable-dev-shm-usage' ] 
+            args: [ '--no-sandbox', '--headless' ] 
         }
     }];
 
