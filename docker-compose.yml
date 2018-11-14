@@ -1,0 +1,56 @@
+version: '3'
+services:
+  test-runner:
+    environment:
+      - SELENIUM_HOST=selenium-hub
+      - Q_APP_PORT=8081
+      - Q_BASE_PATH=http://web
+    build:
+      context: ./
+      dockerfile: ./test/Dockerfile
+    depends_on:
+      - web
+      - selenium-hub
+      - firefox
+      - chrome
+  web:
+    build: .
+    container_name: web
+    ports:
+      - "8081:8081"
+    depends_on:
+      - selenium-hub
+      - firefox
+      - chrome
+  selenium-hub:
+    image: selenium/hub:3.141.59-antimony
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+#  appium:
+#    container_name: appium
+#    image: appium/appium
+#    environment:
+#      - CONNECT_TO_GRID=true
+#      - APPIUM_HOST=127.0.0.1
+#      - APPIUM_PORT=4723
+#      - SELENIUM_HOST=selenium-hub
+#      - SELENIUM_PORT=4444
+#    ports:
+#      - "4723:4723"
+#    depends_on:
+#      - selenium-hub
+  chrome:
+    image: selenium/node-chrome:3.141.59-antimony
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+  firefox:
+    image: selenium/node-firefox:3.141.59-antimony
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444

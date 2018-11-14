@@ -1,4 +1,15 @@
+// TODO: Better mappings to QuasarConfig && quasar-cli
+let qc = {
+  seleniumHost: process.env.SELENIUM_HOST || 'localhost',
+  seleniumPort: process.env.SELENIUM_PORT || 4444,
+  appPort: process.env.Q_APP_PORT || 8081,
+  baseUrl: process.env.Q_BASE_PATH || 'http://localhost'
+}
+
 exports.config = {
+    quasar: qc,
+    host: qc.seleniumHost,
+    port: qc.seleniumPort,
     //
     // ==================
     // Specify Test Files
@@ -69,7 +80,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost',
+    baseUrl: qc.baseUrl,
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -103,7 +114,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['chromedriver', 'appium'],//
+    services: ['chromedriver'],//
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: http://webdriver.io/guide/testrunner/frameworks.html
@@ -198,7 +209,7 @@ exports.config = {
      */
     // afterSuite: function (suite) {
     // },
-    
+
     /**
      * Runs after a WebdriverIO command gets executed
      * @param {String} commandName hook command name
